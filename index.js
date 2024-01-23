@@ -8,7 +8,7 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./src/page-template.js");
+const render = require("./src/make-site.js");
 const team = [];
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
@@ -248,55 +248,4 @@ const createTeam = () => {
 }
 
 createManager();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// =======================================
-// const team = []
-
-// function addManager() {
-// inquirer
-//   .prompt([
-//     {
-//       type: 'input',
-//       message: 'What is your user name?',
-//       name: 'username',
-//     },
-//   ])
-//   .then((response) => {
-//     console.log(response)
-//     const manager = new Manager(
-//         response.username,
-//         team.length+1
-//     )
-//     console.log(manager)
-//     team.push(manager)
-//     console.log("welcome", team)
-
-//     createPage()  
-// }
-//   );
-
-// }
-// function createPage(){
-//    const pageTemplate = render(team)
-//    console.log(pageTemplate) 
-// }
-// addManager()
-
-// console.log("test", team)
 
