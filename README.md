@@ -34,9 +34,13 @@ License used for this project - MIT License
 ## Screenshot
 
   Video:
-  
+  [Untitled_ Jan 23, 2024 11_20 PM.webm](https://github.com/JonRahman/Team-Profile-Generator/assets/145556007/1432448a-412e-4cf7-8186-5c64213e3573)
+
 
   Images:
+![Screenshot1](https://github.com/JonRahman/Team-Profile-Generator/assets/145556007/5ef303d3-e139-4dd8-8baa-dc65e76a9a13)
+![Screenshoot1 1](https://github.com/JonRahman/Team-Profile-Generator/assets/145556007/3037cb3e-cc35-4cbc-b48c-fbfd55352eda)
+![Untitled (Workspace) - Visual Studio Code 23_01_2024 23_30_36](https://github.com/JonRahman/Team-Profile-Generator/assets/145556007/0defeea3-e4a0-46f7-a2a0-6942c55b3c46)
 
   
 ## Links
