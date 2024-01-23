@@ -8,8 +8,8 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./src/make-site.js");
-const team = [];
+const render = require("./src/page-template.js");
+const teamMembers = [];
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
@@ -18,12 +18,12 @@ const createManager = () => {
       {
           type: 'input',
           name: 'name',
-          message: 'What is your name? (Required)',
+          message: "What is the Team Managers name? (Required)",
           validate: nameInput => {
               if (nameInput) {
                   return true;
               } else {
-                  console.log('Please enter your name!');
+                  console.log('Please enter the Team Managers name!');
                   return false;
               }
           }
@@ -31,12 +31,12 @@ const createManager = () => {
       {
           type: 'input',
           name: 'employeeId',
-          message: 'Enter your employee ID (Required)',
+          message: "Enter the Team Manager's ID (Required)",
           validate: employeeId => {
               if (employeeId) {
                   return true;
               } else {
-                  console.log('Please enter your employee ID!');
+                  console.log("Please enter the Team Manager's employee ID!");
                   return false;
               }
           }
@@ -44,12 +44,12 @@ const createManager = () => {
       {
           type: 'input',
           name: 'email',
-          message: 'Enter your email address (Required)',
+          message: "Enter the Team Manager's email address (Required)",
           validate: email => {
               if (email) {
                   return true;
               } else {
-                  console.log('Please enter your email address!');
+                  console.log("Please enter the Team Manager's email address!");
                   return false;
               }
           }
@@ -57,12 +57,12 @@ const createManager = () => {
       {
           type: 'input',
           name: 'officeNumber',
-          message: 'Enter your office number (Required)',
+          message: "Enter the Team Manager's office number (Required)",
           validate: officeNumber => {
               if (officeNumber) {
                   return true;
               } else {
-                  console.log('Please enter your office number!');
+                  console.log("Please enter the Team Manager's office number!");
                   return false;
               }
           }
@@ -70,7 +70,7 @@ const createManager = () => {
   ]).then(answers => {
       console.log(answers);
       const manager = new Manager(answers.name, answers.employeeId, answers.email, answers.officeNumber);
-      team.push(manager);
+      teamMembers.push(manager);
       createMenu();
   })
 };
@@ -81,7 +81,7 @@ const createMenu = () => {
           type: 'list',
           name: 'menu',
           message: 'Please select which option you would like to continue with:',
-          choices: ['add an engineer', 'add an intern', 'finish building my team']
+          choices: ['add an engineer', 'add an intern', 'finish building your team']
       }])
       .then(userChoice => {
           switch (userChoice.menu) {
@@ -92,28 +92,24 @@ const createMenu = () => {
                   createIntern();
                   break;
               default:
-                  createTeam();
+                  generateHTML();
           }
       });
 };
 
 const createEngineer = () => {
-  console.log(`
-  ===============
-  Add a New Engineer
-  ===============
-  `);
+  console.log('Add a New Engineer');
 
   return inquirer.prompt([
       {
           type: 'input',
           name: 'name',
-          message: 'What is the name of engineer? (Required)',
+          message: 'What is the name of the engineer? (Required)',
           validate: engineerName => {
               if (engineerName) {
                   return true;
               } else {
-                  console.log('Please enter the name of engineer!');
+                  console.log('Please enter the name of the engineer!');
                   return false;
               }
           }
@@ -121,12 +117,12 @@ const createEngineer = () => {
       {
           type: 'input',
           name: 'employeeId',
-          message: 'Enter your employee ID (Required)',
+          message: 'Enter the Engineers employee ID (Required)',
           validate: employeeId => {
               if (employeeId) {
                   return true;
               } else {
-                  console.log('Please enter your employee ID!');
+                  console.log('Please enter the Engineers employee ID!');
                   return false;
               }
           }
@@ -134,12 +130,12 @@ const createEngineer = () => {
       {
           type: 'input',
           name: 'email',
-          message: 'Enter your email address (Required)',
+          message: 'Enter the Engineers email address (Required)',
           validate: email => {
               if (email) {
                   return true;
               } else {
-                  console.log('Please enter your email address!');
+                  console.log('Please enter the Engineers email address!');
                   return false;
               }
           }
@@ -147,12 +143,12 @@ const createEngineer = () => {
       {
           type: 'input',
           name: 'githubUsername',
-          message: 'Enter your Github username. (Required)',
+          message: 'Enter the Engineers Github username. (Required)',
           validate: githubUsername => {
               if (githubUsername) {
                   return true;
               } else {
-                  console.log('Please enter your Github username!');
+                  console.log('Please enter the Engineers Github username!');
                   return false;
               }
           }
@@ -160,17 +156,13 @@ const createEngineer = () => {
   ]).then(answers => {
       console.log(answers);
       const engineer = new Engineer(answers.name, answers.employeeId, answers.email, answers.githubUsername);
-      team.push(engineer);
+      teamMembers.push(engineer);
       createMenu();
   })
 };
 
 const createIntern = () => {
-  console.log(`
-  ===============
-  Add a New Intern
-  ===============
-  `);
+  console.log('Add a New Intern');
 
   return inquirer.prompt([
       {
@@ -189,12 +181,12 @@ const createIntern = () => {
       {
           type: 'input',
           name: 'employeeId',
-          message: 'Enter your employee ID (Required)',
+          message: 'Enter the interns employee ID (Required)',
           validate: employeeId => {
               if (employeeId) {
                   return true;
               } else {
-                  console.log('Please enter your employee ID!');
+                  console.log('Please enter the interns employee ID!');
                   return false;
               }
           }
@@ -202,12 +194,12 @@ const createIntern = () => {
       {
           type: 'input',
           name: 'email',
-          message: 'Enter your email address (Required)',
+          message: 'Enter the interns email address (Required)',
           validate: email => {
               if (email) {
                   return true;
               } else {
-                  console.log('Please enter your email address!');
+                  console.log('Please enter the interns email address!');
                   return false;
               }
           }
@@ -215,12 +207,12 @@ const createIntern = () => {
       {
           type: 'input',
           name: 'school',
-          message: 'Enter your school name. (Required)',
+          message: 'Enter the interns school name. (Required)',
           validate: school => {
               if (school) {
                   return true;
               } else {
-                  console.log('Please enter your school name!');
+                  console.log('Please enter the interns school name!');
                   return false;
               }
           }
@@ -228,23 +220,19 @@ const createIntern = () => {
   ]).then(answers => {
       console.log(answers);
       const intern = new Intern(answers.name, answers.employeeId, answers.email, answers.school);
-      team.push(intern);
+      teamMembers.push(intern);
       createMenu();
   })
 };
 
-const createTeam = () => {
-  console.log(`
-  ===============
-  Finished building my team!
-  ===============
-  `);
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR);
+}
 
-  // Create the output directory if the output path doesn't exist
-  if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR)
-  }
-  fs.writeFileSync(outputPath, generateSite(team), "utf-8");
+// Function to generate HTML and write it to the output file
+function generateHTML() {
+  const html = render(teamMembers);
+  fs.writeFileSync(outputPath, html, "utf-8");
 }
 
 createManager();
